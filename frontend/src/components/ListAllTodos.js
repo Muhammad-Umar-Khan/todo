@@ -35,7 +35,7 @@ const ListAllTodos = () => {
                   <tr key={todo.id}>
                     <td>{todo.task}</td>
                     <td>
-                      <EditTodo />
+                      <EditTodo todo={todo} todos={todos} setTodos={setTodos} />
                     </td>
                     <td>
                       <DeleteTodo

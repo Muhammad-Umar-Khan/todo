@@ -12,7 +12,7 @@ const home = (req, res) => {
 };
 
 const allTodos = (req, res) => {
-  pool.query("SELECT * FROM todo order by id", (error, result) => {
+  pool.query("SELECT * FROM todo order by id DESC", (error, result) => {
     if (error) throw error;
     res.status(200).json(result.rows);
   });

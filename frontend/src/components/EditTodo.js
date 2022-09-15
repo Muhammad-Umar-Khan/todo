@@ -1,15 +1,34 @@
-const EditTodo = () => {
+import { useState } from "react";
+
+const EditTodo = ({ todo }) => {
+  const [task, setTask] = useState(todo.task);
+  const handleChange = (e) => {
+    setTask(e.target.value);
+  };
+  const handleEdit = async () => {
+    try {
+      const body = { task };
+      await fetch(`http://localhost:3001/todos/${todo.id}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div>
       <button
         type="button"
         className="btn btn-warning"
         data-toggle="modal"
-        data-target="#myModal"
+        data-target={`#id${todo.id}`}
       >
         Edit
       </button>
-      <div className="modal fade" id="myModal" role="dialog">
+      <div className="modal fade" id={`id${todo.id}`} role="dialog">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -17,14 +36,13 @@ const EditTodo = () => {
                 &times;
               </button>
             </div>
-            <div className="modal-body">
-              <p>Some text in the modal.</p>
-            </div>
+            <input value={task} onChange={handleChange}></input>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-default"
                 data-dismiss="modal"
+                onClick={handleEdit}
               >
                 Edit
               </button>
