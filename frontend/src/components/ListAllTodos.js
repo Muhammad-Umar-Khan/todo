@@ -15,7 +15,7 @@ const ListAllTodos = () => {
   };
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [todos]);
 
   return (
     <>
